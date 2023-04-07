@@ -9,6 +9,12 @@ void run(HookContext context) {
   context.vars['application_id_android'] =
       _appId(context, platform: Platform.android);
   context.vars['application_id'] = _appId(context);
+  final stateManagement =
+      context.vars['state_management'].toString().toLowerCase();
+  final isBloc = stateManagement == 'bloc';
+  final isGetX = stateManagement == 'getx';
+  context.vars['isBloc'] = isBloc;
+  context.vars['isGetX'] = isGetX;
 }
 
 String _appId(HookContext context, {Platform? platform}) {

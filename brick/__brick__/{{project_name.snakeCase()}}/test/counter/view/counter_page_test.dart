@@ -1,15 +1,15 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
-
+import 'package:{{project_name.snakeCase()}}/modules/counter/counter.dart';
+{{#isBloc}}
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+{{/isBloc}}
 import '../../helpers/helpers.dart';
-
+{{#isBloc}}
 class MockCounterCubit extends MockCubit<int> implements CounterCubit {}
-
+{{/isBloc}}
 void main() {
   group('CounterPage', () {
     testWidgets('renders CounterView', (tester) async {
@@ -17,7 +17,7 @@ void main() {
       expect(find.byType(CounterView), findsOneWidget);
     });
   });
-
+  {{#isBloc}}
   group('CounterView', () {
     late CounterCubit counterCubit;
 
@@ -65,4 +65,5 @@ void main() {
       verify(() => counterCubit.decrement()).called(1);
     });
   });
+  {{/isBloc}}
 }
